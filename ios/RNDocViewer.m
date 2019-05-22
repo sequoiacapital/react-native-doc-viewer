@@ -57,7 +57,7 @@ RCT_EXPORT_METHOD(openDoc:(NSArray *)array callback:(RCTResponseSenderBlock)call
         NSString* urlStr = dict[@"url"];
         NSString* fileNameOptional = dict[@"fileName"];
         NSString* fileType = dict[@"fileType"];
-        NSURL* url = [NSURL URLWithString:[urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        NSURL* url = [NSURL URLWithString:urlStr];
         NSData* dat = [NSData dataWithContentsOfURL:url];
         RCTLogInfo(@"Url %@", url);
         RCTLogInfo(@"FileNameOptional %@", fileNameOptional);
@@ -158,14 +158,14 @@ RCT_EXPORT_METHOD(openDocBinaryinUrl:(NSArray *)array callback:(RCTResponseSende
         //Parse the Binary from URL
         //NSData* byteArrayString = [binaryString dataUsingEncoding:NSUTF8StringEncoding];
          //NSLog(@"%@", byteArrayString);
-        NSURL* urlbinary = [NSURL URLWithString:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        NSURL* urlbinary = [NSURL URLWithString:url];
         NSData* dat = [NSData dataWithContentsOfURL:urlbinary];
-        if (dat == nil) {
-            if (callback) {
-                callback(@[[NSNull null], @"DATA nil"]);
-            }
-            return;
-        }
+        // if (dat == nil) {
+        //     if (callback) {
+        //         callback(@[[NSNull null], @"DATA nil"]);
+        //     }
+        //     return;
+        // }
         NSString* fileName = [NSString stringWithFormat:@"%@%@%@", filename, @".", filetype];
         NSString* fileExt = [fileName pathExtension];
         if([fileExt length] == 0){
